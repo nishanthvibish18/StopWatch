@@ -28,7 +28,7 @@ class StopwatchViewModel: ObservableObject {
         timer = Timer.scheduledTimer(withTimeInterval: selectedPrecision == .seconds ? 1 : 0.001, repeats: true) { _ in
             self.updateTime()
         }
-    
+        self.startActivity()
         
     }
     
@@ -50,6 +50,11 @@ class StopwatchViewModel: ObservableObject {
     func updateTime() {
         guard let startDate = startDate else { return }
         timeElapsed = Date().timeIntervalSince(startDate)
+       
+    }
+    
+    private func startActivity(){
+        guard let startDate = startDate else { return }
         let stopWatchAttributes = StopWatchAttribute()
         let state = StopWatchAttribute.ContentState(startTime: startDate)
         
